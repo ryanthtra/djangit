@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>The home page of djangit.</h1>
+<a class="btn btn-primary" href="{% url 'posts:create' %}">New Post</a>
+<br>
+<br>
+
+{% for post in posts.all %}
+<table>
+  <tr>
+    <td style="padding-right: 20px;">
+      <form method="POST" action="{% url 'posts:upvote' post.id %}" id="upvote-{{post.id}}">
+        {% csrf_token %}
+        <input type="hidden" value="UP">
+      </form> 
+      <a href="#" onclick="document.getElementById('upvote-{{post.id}}').submit()"><i class="fas fa-caret-up fa-2x"></i></a>
+      <br>
+      <span>{{ post.votes_total }}</span>
+      <br>
+      <form method="POST" action="{% url 'posts:downvote' post.id %}" id="downvote-{{post.id}}">
+        {% csrf_token %}
+        <input type="hidden" value="DOWN">
+      </form>
+      <a href="#" onclick="document.getElementById('downvote-{{post.id}}').submit()"><i class="fas fa-caret-down fa-2x"></i></a>
+      
+    </td>
+    <td>
+      <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>
+      <br>
+      {{ post.publish_date_pretty }} by <a href="{% url 'posts:userposts' post.author.id %}">{{ post.author.username }}</a>
+    </td>
+  </tr>
+</table>
+<hr>
+{% endfor %}
+
+{% endblock %}
