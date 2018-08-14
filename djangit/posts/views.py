@@ -36,7 +36,13 @@ def upvote(request, pk):
     # Increment votes
     post.votes_total += 1
     post.save()
-    return redirect('home')
+    user_id = -1
+    if 'uid' in request.POST.keys() and request.POST['uid']:
+      user_id = request.POST['uid']
+    if user_id != -1:
+      return redirect('posts:userposts', uid=user_id)
+    else:
+      return redirect('home')
 
 def downvote(request, pk):
   if request.method == 'POST':
@@ -44,9 +50,15 @@ def downvote(request, pk):
     # Decrement votes
     post.votes_total += -1
     post.save()
-    return redirect('home')
+    user_id = -1
+    if 'uid' in request.POST.keys() and request.POST['uid']:
+      user_id = request.POST['uid']
+    if user_id != -1:
+      return redirect('posts:userposts', uid=user_id)
+    else:
+      return redirect('home')
 
 def userposts(request, uid):
   user = get_object_or_404(User, pk=uid)
-  posts = Post.objects.filter(author_id=uid)
+  posts = Post.objects.filter(author_id=uid).order_by('-votes_total')
   return render(request, 'posts/userposts.html', {'user':user, 'posts':posts})

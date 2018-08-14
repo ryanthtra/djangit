@@ -7,16 +7,18 @@
 <table>
   <tr>
     <td style="padding-right: 20px;">
-      <form method="POST" action="{% url 'posts:upvote' post.id %}" id="upvote-{{post.id}}">
+      <form method="POST" action="{% url 'posts:upvote' pk=post.id %}" id="upvote-{{post.id}}">
         {% csrf_token %}
+        <input type="hidden" name='uid' value={{user.id}}>
         <input type="hidden" value="UP">
       </form> 
       <a href="#" onclick="document.getElementById('upvote-{{post.id}}').submit()"><i class="fas fa-caret-up fa-2x"></i></a>
       <br>
       <span>{{ post.votes_total }}</span>
       <br>
-      <form method="POST" action="{% url 'posts:downvote' post.id %}" id="downvote-{{post.id}}">
+      <form method="POST" action="{% url 'posts:downvote' pk=post.id %}" id="downvote-{{post.id}}">
         {% csrf_token %}
+        <input type="hidden" name='uid' value={{user.id}}>
         <input type="hidden" value="DOWN">
       </form>
       <a href="#" onclick="document.getElementById('downvote-{{post.id}}').submit()"><i class="fas fa-caret-down fa-2x"></i></a>
