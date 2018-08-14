@@ -1,7 +1,7 @@
 # djangit
 A simple Reddit-like website built with the Django Python web framework.
 
-You can find the site running at http://ryanthtra.eastus.cloudapp.azure.com.
+You can find the site running at http://ryanthtra.eastus.cloudapp.azure.com.  The site is running on a Linux Ubuntu 18.04 virtual machine in Microsoft Azure using Gunicorn web server and Nginx reverse proxy.
 
 The site has the following pages:
 
