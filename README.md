@@ -18,3 +18,4 @@ Login | Displays a form to log in an existing user.
   - Currently, votes are not restricted to logged in users, nore are they restricted to one vote per user/guest.
 - A user's posts page can be accessed by clicking on a post's author's name.
 - Forms are currently just basic HTML forms.  Future tweaks would include implementing Django Forms, though the csrf_token template tag is already being used.
+- There is currently no pagination, so theoretically, the Home Page could end up getting ridiculously long.
